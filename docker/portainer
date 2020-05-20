@@ -1,0 +1,22 @@
+---
+- hosts: docker-hosts
+  become: yes
+
+  tasks:
+    - name: Create Portainer volume
+      docker_volume:
+        name: portainer_data
+        state: present
+
+    - name: Start Portainer
+      docker_container:
+        name: portainer
+        image: portainer/portainer
+        state: present
+        volumes:
+          - /portainer_data
+          - /var/run/docker.sock
+        exposed_ports: 9000
+        restart_policy: always
+        cleanup: no
+        detach: yes

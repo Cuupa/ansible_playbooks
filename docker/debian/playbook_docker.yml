@@ -1,0 +1,56 @@
+---
+- hosts: docker-hosts
+  become: yes
+
+  pre_tasks:
+    - name: Update APT-Cache if needed.
+      apt:
+         update_cache: yes
+         cache_valid_time: 3600
+
+  tasks:
+    - name: Ensure NTP is installed
+      package:
+        name: ntp
+        state: present
+    - name: Ensure NTP is running
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+
+    - name: Install docker dependencies
+      package:
+        name: apt-transport-https
+        state: present
+    - package:
+        name: ca-certificates
+        state: present
+    - package:
+        name: curl
+        state: present
+    - package:
+        name: gnupg-agent
+        state: present
+    - package:
+        name: software-properties-common
+
+    - name: Add dockers key
+      apt_key:
+        url: "https://download.docker.com/linux/debian/gpg"
+
+    - name: Add docker to repository
+      apt_repository: "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
+
+    - name: Refresh repository
+      apt:
+        update_cache: yes
+
+    - name: Ensure docker is installed
+      package: name=docker-ce state=present
+
+    - name: Testdocker
+      shell: systemctl enable docker
+
+    - name: Testdocker
+      shell: systemctl start docker
