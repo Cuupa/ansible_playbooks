@@ -1,0 +1,40 @@
+---
+- hosts: workstations
+
+  - pre_tasks:
+    package:
+      name: *
+      state: latest
+      update_cache: yes
+
+  - task:
+    - name: Remove outdated packages
+      package:
+        name:
+          - python
+          - pip
+        state: absent
+
+    - name: Install personal programms
+        package:
+        name:
+          - atom
+          - discord
+          - filezilla
+          - kdeconnect
+          - keepassxc
+          - obs-studio
+          - teamspeak3
+          - thunderbird
+          - vlc
+          - nmap
+          - python3
+          - pip3
+          - virtualbox
+          - linux56-virtualbox-host-modules
+          - nano
+          - p7zip
+          - gimp
+          - gufw
+          - ansible
+        state: present
