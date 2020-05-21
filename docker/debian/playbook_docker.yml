@@ -19,21 +19,20 @@
         state: started
         enabled: yes
 
+    - name: Remove older docker versions
+      package:
+        name:
+          - docker
+          - docker-engine
+        state: absent
+
     - name: Install docker dependencies
       package:
-        name: apt-transport-https
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - gnupg2
         state: present
-    - package:
-        name: ca-certificates
-        state: present
-    - package:
-        name: curl
-        state: present
-    - package:
-        name: gnupg-agent
-        state: present
-    - package:
-        name: software-properties-common
 
     - name: Add dockers key
       apt_key:
