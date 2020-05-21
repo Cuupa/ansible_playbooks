@@ -1,24 +1,13 @@
 ---
-- hosts: workstations
+- hosts: all
+  become: yes
 
-  - pre_tasks:
-    package:
-      name: *
-      state: latest
-      update_cache: yes
-
-  - task:
-    - name: Remove outdated packages
+  tasks:
+    - name: Install personal programms via pacman
       package:
         name:
-          - python
-          - pip
-        state: absent
-
-    - name: Install personal programms
-        package:
-        name:
           - atom
+          - ufw
           - discord
           - filezilla
           - kdeconnect
@@ -28,13 +17,22 @@
           - thunderbird
           - vlc
           - nmap
-          - python3
-          - pip3
+          - python
           - virtualbox
-          - linux56-virtualbox-host-modules
           - nano
           - p7zip
           - gimp
           - gufw
+          - ffmpeg
+          - git
           - ansible
-        state: present
+        state: latest
+
+    - name: Install personal programms via pamac
+      shell: "pamac install linux56-virtualbox-host-modules"
+      shell: "pamac install google-chrome"
+      shell: "pamac install spotify"
+      shell: "pamac install etcher"
+      shell: "pamac install skype"
+      shell: "pamac install teamviewer"
+      shell: "pamac install jetbrains-toolbox"
