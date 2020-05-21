@@ -23,3 +23,6 @@ Setting up basic security for group "server"
 - Removing unused packages
 - Setting up firewall
 - Install fail2ban
+
+## Personal Scripts
+Just install my personal programms
