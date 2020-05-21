@@ -16,10 +16,10 @@ This is my personal repository for my ansible playbooks
 
 ## Setup Scripts
 Setting up basic security for group "server"
-- changing SSH port
-- dening root login
-- setting sshd_config file permissions
-- creating a deployment user
-- removing unused packages
-- setting up firewall
-- install fail2ban
+- Changing SSH port
+- Dening root login
+- Setting sshd_config file permissions
+- Creating a deployment user
+- Removing unused packages
+- Setting up firewall
+- Install fail2ban
