@@ -47,7 +47,9 @@
         update_cache: yes
 
     - name: Ensure docker is installed
-      package: name=docker-ce state=present
+      package:
+        name: docker-ce
+        state: present
 
     - name: Testdocker
       shell: systemctl enable docker
